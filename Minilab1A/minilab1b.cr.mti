@@ -1,0 +1,117 @@
+C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/rom.v {1 {vlog -work work -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/rom.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module rom
+
+Top level modules:
+	rom
+
+} {} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/mat_mult.sv {0 {vlog -work work -sv -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/mat_mult.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module mat_mult
+** Warning: C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/mat_mult.sv(13): (vlog-13314) Defaulting port 'a_mat' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+** Error: (vlog-13069) C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/mat_mult.sv(20): near "logic": syntax error, unexpected "SystemVerilog keyword 'logic'", expecting ';'.
+
+} {5.0 6.0} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/fifo_ip_bb.v {1 {vlog -work work -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/fifo_ip_bb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module fifo_ip
+
+Top level modules:
+	fifo_ip
+
+} {} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/memory.v {1 {vlog -work work -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/memory.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module mem_wrapper
+
+Top level modules:
+	mem_wrapper
+
+} {} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/mult_ip.v {1 {vlog -work work -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/mult_ip.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module mult_ip
+
+Top level modules:
+	mult_ip
+
+} {} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/mat_mult_tb.sv {0 {vlog -work work -sv -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/mat_mult_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module mat_mult_tb
+** Error: (vlog-13069) C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/mat_mult_tb.sv(24): near "EOF": syntax error, unexpected end of source code.
+
+} {4.0 5.0} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/mac.sv {1 {vlog -work work -sv -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/mac.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module MAC
+
+Top level modules:
+	MAC
+
+} {} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/fifo_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/fifo_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module fifo_tb
+
+Top level modules:
+	fifo_tb
+
+} {} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/minilab0_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/minilab0_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module minilab0_tb
+
+Top level modules:
+	minilab0_tb
+
+} {} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/add_ip_bb.v {1 {vlog -work work -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/add_ip_bb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module add_ip
+
+Top level modules:
+	add_ip
+
+} {} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/mult_ip_bb.v {1 {vlog -work work -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/mult_ip_bb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module mult_ip
+
+Top level modules:
+	mult_ip
+
+} {} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/fifo.sv {1 {vlog -work work -sv -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/fifo.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module FIFO
+
+Top level modules:
+	FIFO
+
+} {} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/tb_mac.sv {1 {vlog -work work -sv -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/tb_mac.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module tb_mac
+
+Top level modules:
+	tb_mac
+
+} {} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/add_ip.v {1 {vlog -work work -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/add_ip.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module add_ip
+
+Top level modules:
+	add_ip
+
+} {} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/fifo_ip.v {1 {vlog -work work -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/fifo_ip.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module fifo_ip
+
+Top level modules:
+	fifo_ip
+
+} {} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/Minilab0.v {1 {vlog -work work -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/Minilab0.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module Minilab0
+
+Top level modules:
+	Minilab0
+
+} {} {}} C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/fetch.sv {1 {vlog -work work -sv -stats=none C:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0/fetch.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module fetch
+
+Top level modules:
+	fetch
+
+} {} {}}
