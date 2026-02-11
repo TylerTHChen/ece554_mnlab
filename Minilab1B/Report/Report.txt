@@ -1,0 +1,9 @@
+1. We wrote testbenches for both fetch and matrix multiplication module. The testbench focus mainly on instantiating the designs. We added multiple internal/external signals on the waveform to inspect the status of different registers or wires of specific checkpoint. For example, since we designed our fetch to output the column data in each cycle instead of the entire matrix. We are able to check the status through our done signal.
+
+2. We do it by paralleling our A*B+Cout in the MAC we originally had.
+
+3. We do it by flipping the switch and checked all the cases.
+
+4. The signalTap task want us to ensure the MM part. Since we have a done signal asserted right after we have finish fetching all the datas from the mifs file. We triggered the SignalTap during the posedge of done. Then we checked if the memory matched what we have in the mifs file.
+
+5. We spent most of our time debugging our Verilog file. Having the waveform helped us a lot. We were able to check on every signal and break down the problem to smaller problems.
