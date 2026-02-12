@@ -16,23 +16,77 @@ logic wren;
 logic [11:0] buffer_out;
 logic full;
 logic empty;
+logic valid_ff
+logic [10:0] curr_x, curr_y;
+logic [11:0] top_row_1, top_row_2, bot_row_1, bot_row_2;
+logic [13:0] data_out;
+
+
+assign oX_Cont = curr_x;
+assign oY_Cont = curr_y;
+assign oDATA = data_out[13:2];
+assign valid = valid_ff;
+assign rden = full;
+assign wren = iDVAL;
 
 FIFO #(.DEPTH(1280), .DATA_WIDTH(12)) buffer(
     .clk(iCLK),
     .rst_n(iRST),
     .rden(rden),
     .wren(wren),
-    .i_data(iData),
+    .i_data(iDATA),
     .o_data(buffer_out),
     .full(full),
     .empty(empty)   
 );
 
-assign rden = full;
-assign wren = iDVAL;
+always @(posedge iCLK, negedge IRST) begin
+    if(!iRST)begin
+        top_row_1 <= 0;
+        top_row_2 <= 0;
+        bot_row_1 <= 0;
+        bot_row_2 <= 0;
+    end
+    else begin
+        top_row_1 <= buffer_out;
+        top_row_2 <= top_row_2;
+        bot_row_1 <= iDATA;
+        bot_row_2 <= bot_row_1;
+    end
+end
 
+always @(posedge iCLK, negedge iRST)begin
+    if(!iRST)begin
+        curr_x <= 0;
+        curr_y <= 0;
+    end
+    else begin
+        curr_x <= iX_Cont;
+        curr_y <= iY_Cont;
+    end
+end
 
+always begin
+    if(!|curr_y && !|curr_x) 
+        data_out <= bot_row_1;
+    else if (!|curr_y) begin 
+        data_out <= bot_row_1 + bot_row_2;
+    end
+    else if (!|curr_x) begin
+        data_out <= bot_row_1 + top_row_1;
+    end
+    else begin
+        data_out <= bot_row_1 + bot_row_2 + top_row_1 + top_row_2;
+    end
+end
 
+always @(posedge iCLK, negedge iRST)begin
+    if(!iRST)begin
+        valid_ff <= 0;
+    end else begin
+        valif_ff <= iDVAL;
+    end
+end
 
 
 endmodule

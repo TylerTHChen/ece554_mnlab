@@ -6,7 +6,8 @@ module image_processing (
     input iCLK,
     input iRST,
     input switch, // 0 for vertical, 1 for horizontal
-    output [11:0] output_data
+    output [11:0] output_data, 
+    output valid
 );
 
 logic [11:0] grey_out;
@@ -38,7 +39,7 @@ convolution u_convolution (
     .y      (y_cont),
     .vertical (switch),
     .data_out (conv_out),
-    .valid   (conv_valid)
+    .valid   (valid)
     );
 
 // Abs instantiation
