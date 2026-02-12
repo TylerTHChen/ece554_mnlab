@@ -1,0 +1,14 @@
+Repository Setup
+
+For this assignment, I used the shared GitHub repository that we created for our group. I cloned the repository to my local machine using git clone and worked in our separate folder dedicated 
+for minilab1A. 
+After verifying functionality through simulation and on the board, the verilog files, waves, and reports were added using git add, committed the changes, and pused using git push. 
+The final version of the design and supporting files are available in the Minilab 1A folder in the repository. The waves, logs, and RPT files are available within the ReportWaves folder. 
+
+Resource Utilization Comparison
+Two synthesis reports were generated:
+* Custom Design Resource Usage: 111 ALMs
+* Design Using IP Blocks: 96 ALMs
+
+The design that uses IP blocks required fewer ALMs compared to the fully custom implementation. This is likely because provided IP cores are optimized 
+for the target FPGA architecture, resulting in more efficient logic mapping and reduced resource utilization. Overall, the IP-based implementation demonstrated better area efficiency.
