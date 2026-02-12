@@ -324,6 +324,24 @@ RAW2RGB				u4	(
 							.iY_Cont(Y_Cont)
 						   );
 
+wire [11:0] output_data;
+
+image_process u9 (
+                     .iX_Cont(X_Cont),
+                     .iY_Cont(Y_Cont),
+                     .iDVAL(mCCD_DVAL),
+                     .iCLK(D5M_PIXLCLK),
+                     .iRST(DLY_RST_1),
+                     .iDATA(mCCD_DATA),
+                     .iDVAL(mCCD_DVAL),
+                     .switch(SW[1]),
+                     .oDATA(output_data)
+                  );
+
+assign sCCD_R = output_data;
+assign sCCD_G = output_data;
+assign sCCD_B = output_data;
+
 //Frame count display
 SEG7_LUT_6 			u5	(	
 							.oSEG0(HEX0),.oSEG1(HEX1),
