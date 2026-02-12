@@ -1,5 +1,4 @@
 Repository Setup
-
 For this assignment, I used the shared GitHub repository that we created for our group. I cloned the repository to my local machine using git clone and worked in our separate folder dedicated 
 for minilab1A. 
 After verifying functionality through simulation and on the board, the verilog files, waves, and reports were added using git add, committed the changes, and pused using git push. 
