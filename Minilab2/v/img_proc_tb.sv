@@ -21,10 +21,10 @@ module img_proc_tb;
 
   image_processing dut (
     .iCLK(clk),
-    .iRST(rst_n),          // active-low reset (same behavior as rst_n)
+    .iRST(rst_n),          // active-low reset like rst_n
     .iX_Cont(iX_Cont),
     .iY_Cont(iY_Cont),
-    .iData(iData),
+    .iDATA(iData),
     .iDVAL(iDVAL),
     .switch(switch),
     .output_data(output_data),
@@ -43,9 +43,7 @@ module img_proc_tb;
     iData   = '0;
     iDVAL   = 1'b0;
 
-    for (int k = 0; k < NPIX; k++) out_mem[k] = 12'h000;
-
-    $readmemh("input.hex", in_mem); // expects 12-bit hex values (000..FFF)
+    $readmemh("input.hex", in_mem); // 12-bit values (000..FFF)
 
     #20;
     rst_n = 1'b1;          // deassert reset
@@ -67,7 +65,6 @@ module img_proc_tb;
     iDVAL <= 1'b0;
     iData <= '0;
 
-    // wait until we've captured all expected output pixels
     while (out_idx < NPIX) @(posedge clk);
 
     $writememh("dut_out.hex", out_mem);

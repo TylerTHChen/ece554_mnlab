@@ -20,7 +20,7 @@ greyscale u_greyscale (
     .iX_Cont(iX_Cont), 
     .iY_Cont(iY_Cont),
     .iDATA(iDATA),
-    .iDVAL(iDAVAL),
+    .iDVAL(iDVAL),
     .iCLK(iCLK),
     .iRST(iRST),
     .oDATA(grey_out),
@@ -38,7 +38,7 @@ convolution u_convolution (
     .x      (x_cont),
     .y      (y_cont),
     .vertical (switch),
-    .data_out (conv_out),
+    .data_out (output_data),
     .valid   (valid)
     );
 

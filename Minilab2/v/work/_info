@@ -10,23 +10,23 @@ z2
 cModel Technology
 dC:/Users/tyler_hyposvu/UW/ECE554/minilab1/Tools/SystemBuilder/CodeGenerated/DE1_SOC/Minilab0
 vCCD_Capture
-!s110 1770933010
+Z0 !s110 1770935941
 !i10b 1
 !s100 OJR9o<d98HinX8>[iZkL]1
-Z0 !s11b Dg1SIo80bB@j0V0VzS_@n1
+Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
 II0<`mfhlR^5kPHUP3^Bof3
-Z1 VDg1SIo80bB@j0V0VzS_@n1
-Z2 dC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v
-Z3 w1770764271
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 dC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v
+Z4 w1770764271
 8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/CCD_Capture.v
 FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/CCD_Capture.v
-!i122 0
+!i122 16
 L0 43 146
-Z4 OV;L;2020.1;71
+Z5 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z5 !s108 1770933010.000000
+!s108 1770935940.000000
 !s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/CCD_Capture.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/CCD_Capture.v|
 !i113 1
@@ -35,24 +35,24 @@ Z7 tCvgOpt 0
 n@c@c@d_@capture
 vconvolution
 Z8 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-!s110 1770935291
+!s110 1770941460
 !i10b 1
-!s100 UN1R2@>O2M>H]]gB>64Gb3
-R0
-Ic=9SFSWaM0J9k9HMgnAS]3
+!s100 :kaV1zPlQBRj7IRmjCzhY3
 R1
-S1
+I75_O?YY0[2_TQQUXJekfc1
 R2
-w1770935289
+S1
+R3
+w1770941454
 8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/convolution.sv
 FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/convolution.sv
-!i122 15
-L0 1 223
-R4
+!i122 49
+L0 1 214
+R5
 r1
 !s85 0
 31
-!s108 1770935290.000000
+!s108 1770941459.000000
 !s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/convolution.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/convolution.sv|
 !i113 1
@@ -60,24 +60,24 @@ Z9 o-work work -sv
 R7
 vFIFO
 R8
-Z10 !s110 1770933011
+R0
 !i10b 1
 !s100 <l39aRLbkBlBmLR]nJn[O0
-R0
-Ig=HRKDZ2Vd9hG8lR`S]LQ1
 R1
-S1
+Ig=HRKDZ2Vd9hG8lR`S]LQ1
 R2
+S1
+R3
 w1770767379
 8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/fifo.sv
 FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/fifo.sv
-!i122 1
-L0 1 55
-R4
+!i122 18
+Z10 L0 1 55
+R5
 r1
 !s85 0
 31
-R5
+Z11 !s108 1770935941.000000
 !s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/fifo.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/fifo.sv|
 !i113 1
@@ -86,47 +86,72 @@ R7
 n@f@i@f@o
 vfilter_grid
 R8
-!s110 1770935278
+!s110 1770939264
 !i10b 1
-!s100 R?2?Mzh@3]7^_gHHR7LG?0
-R0
-IJ0VE4:ESeTz@NoEg3fW;02
+!s100 I4D4dhJ380b^FB1m7mTno3
 R1
-S1
+I`6>^G?W??35nb>YSOfHP91
 R2
-w1770935240
+S1
+R3
+w1770939258
 8C:\Users\tyler_hyposvu\UW\ECE554\MiniLabs\Minilab2\v\filter_grid.sv
 FC:\Users\tyler_hyposvu\UW\ECE554\MiniLabs\Minilab2\v\filter_grid.sv
-!i122 14
-L0 1 40
-R4
+!i122 45
+L0 1 39
+R5
 r1
 !s85 0
 31
-!s108 1770935278.000000
+!s108 1770939264.000000
 !s107 C:\Users\tyler_hyposvu\UW\ECE554\MiniLabs\Minilab2\v\filter_grid.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:\Users\tyler_hyposvu\UW\ECE554\MiniLabs\Minilab2\v\filter_grid.sv|
 !i113 1
 R9
 R7
-vI2C_CCD_Config
-R10
+vgreyscale
+R8
+!s110 1770936446
 !i10b 1
-!s100 6M4]:_]5ZITo?O:kD9e9L2
-R0
-Ibzi973?^;;o9SM]fZi>HR0
+!s100 RbFfUIK6;Q5:iG<[ECV:o0
 R1
+IO=ibY]Bd>>KfWZH=>iRZS2
 R2
+S1
 R3
-8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/I2C_CCD_Config.v
-FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/I2C_CCD_Config.v
-!i122 2
-L0 43 227
-R4
+w1770936445
+8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/GreyScale.sv
+FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/GreyScale.sv
+!i122 31
+L0 1 92
+R5
 r1
 !s85 0
 31
-Z11 !s108 1770933011.000000
+!s108 1770936446.000000
+!s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/GreyScale.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/GreyScale.sv|
+!i113 1
+R9
+R7
+vI2C_CCD_Config
+R0
+!i10b 1
+!s100 6M4]:_]5ZITo?O:kD9e9L2
+R1
+Ibzi973?^;;o9SM]fZi>HR0
+R2
+R3
+R4
+8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/I2C_CCD_Config.v
+FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/I2C_CCD_Config.v
+!i122 20
+L0 43 227
+R5
+r1
+!s85 0
+31
+R11
 !s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/I2C_CCD_Config.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/I2C_CCD_Config.v|
 !i113 1
@@ -134,19 +159,19 @@ R6
 R7
 n@i2@c_@c@c@d_@config
 vI2C_Controller
-R10
+R0
 !i10b 1
 !s100 z^0D>X0bZ8`gOa3gSKUH73
-R0
-ION^zf?=[6_BTS9R`lRUk@0
 R1
+ION^zf?=[6_BTS9R`lRUk@0
 R2
 R3
+R4
 8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/I2C_Controller.v
 FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/I2C_Controller.v
-!i122 3
+!i122 21
 L0 42 110
-R4
+R5
 r1
 !s85 0
 31
@@ -159,43 +184,43 @@ R7
 n@i2@c_@controller
 vimage_processing
 R8
-!s110 1770935172
+!s110 1770938911
 !i10b 1
-!s100 ^;=OldK[Mi[RGYih51<5Q0
-R0
-IPiSRH`H[PQFlMzEfK_>hC2
+!s100 4VBZm1Sm:L=zz9;CC<b2D3
 R1
-S1
+IfhUH;OZ>diSQQ`d=1bJ[X1
 R2
-w1770934355
+S1
+R3
+w1770938742
 8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/Image_Processing.sv
 FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/Image_Processing.sv
-!i122 13
-L0 1 54
-R4
+!i122 42
+R10
+R5
 r1
 !s85 0
 31
-!s108 1770935172.000000
+!s108 1770938911.000000
 !s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/Image_Processing.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/Image_Processing.sv|
 !i113 1
 R9
 R7
 vLine_Buffer1
-Z12 !s110 1770933012
+Z12 !s110 1770935942
 !i10b 1
 !s100 DbC>M^igo[n8ziGR@N@023
-R0
-IWLIWU]8jD`c[dGYED:Jka0
 R1
+IWLIWU]8jD`c[dGYED:Jka0
 R2
 R3
+R4
 8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/Line_Buffer1.v
 FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/Line_Buffer1.v
-!i122 4
+!i122 23
 L0 39 51
-R4
+R5
 r1
 !s85 0
 31
@@ -210,20 +235,20 @@ vRAW2RGB
 R12
 !i10b 1
 !s100 ^g`aa[Z?>`KGzd68flhM<1
-R0
-IfM57_=lcz`3=[;inW^0CI0
 R1
+IfM57_=lcz`3=[;inW^0CI0
 R2
 R3
+R4
 8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/RAW2RGB.v
 FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/RAW2RGB.v
-!i122 5
+!i122 24
 L0 43 86
-R4
+R5
 r1
 !s85 0
 31
-Z13 !s108 1770933012.000000
+Z13 !s108 1770935942.000000
 !s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/RAW2RGB.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/RAW2RGB.v|
 !i113 1
@@ -234,16 +259,16 @@ vReset_Delay
 R12
 !i10b 1
 !s100 BO]QNi;435TJ@V_FJDUKD3
-R0
-IS?[VcG1mK`@_5RRPWK^bP0
 R1
+IS?[VcG1mK`@_5RRPWK^bP0
 R2
 R3
+R4
 8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/Reset_Delay.v
 FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/Reset_Delay.v
-!i122 6
+!i122 25
 L0 43 40
-R4
+R5
 r1
 !s85 0
 31
@@ -255,19 +280,19 @@ R6
 R7
 n@reset_@delay
 vsdram_pll
-Z14 !s110 1770933013
+R12
 !i10b 1
 !s100 TjIb>^RiIUmcR[QN>Pi]k0
-R0
-I4UQL23H`_3mzJc4?0f`B=1
 R1
+I4UQL23H`_3mzJc4?0f`B=1
 R2
 R3
+R4
 8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/sdram_pll.v
 FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/sdram_pll.v
-!i122 7
+!i122 26
 L0 8 20
-R4
+R5
 r1
 !s85 0
 31
@@ -278,23 +303,23 @@ R13
 R6
 R7
 vSEG7_LUT
-R14
+R12
 !i10b 1
 !s100 o1P=QAl9SobWckCbL^Flb3
-R0
-I?LRT[jV>9<7PDfNSdl]<N3
 R1
+I?LRT[jV>9<7PDfNSdl]<N3
 R2
 R3
+R4
 8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/SEG7_LUT.v
 FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/SEG7_LUT.v
-!i122 8
+!i122 27
 L0 43 28
-R4
+R5
 r1
 !s85 0
 31
-Z15 !s108 1770933013.000000
+R13
 !s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/SEG7_LUT.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/SEG7_LUT.v|
 !i113 1
@@ -302,47 +327,97 @@ R6
 R7
 n@s@e@g7_@l@u@t
 vSEG7_LUT_6
-R14
+R12
 !i10b 1
 !s100 M2C49lj?<V]`o_<DP^3<^1
-R0
-I40DcnV^jX9l_QY>4g@e1U2
 R1
+I40DcnV^jX9l_QY>4g@e1U2
 R2
 R3
+R4
 8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/SEG7_LUT_6.v
 FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/SEG7_LUT_6.v
-!i122 9
+!i122 28
 L0 43 13
-R4
+R5
 r1
 !s85 0
 31
-R15
+R13
 !s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/SEG7_LUT_6.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/SEG7_LUT_6.v|
 !i113 1
 R6
 R7
 n@s@e@g7_@l@u@t_6
-vVGA_Controller
-R14
+vtb_convolution
+R8
+!s110 1770940671
 !i10b 1
-!s100 9?Jf_KF6HVQMFmA4KJ>QI3
-R0
-I3IXIdm`HfU_dkFL;M403G2
+!s100 QPFBDF1Q=cNgCCZjOnZNh0
 R1
+I4W6M4l[aj8T>zfOY]NFJ`2
 R2
+S1
 R3
-8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/VGA_Controller.v
-FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/VGA_Controller.v
-!i122 10
-L0 43 180
-R4
+w1770940665
+8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_convolution.sv
+FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_convolution.sv
+!i122 47
+R10
+R5
 r1
 !s85 0
 31
-R15
+!s108 1770940671.000000
+!s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_convolution.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_convolution.sv|
+!i113 1
+R9
+R7
+vtb_filter_grid
+R8
+!s110 1770939206
+!i10b 1
+!s100 6a=KU4A`3jAGcmUkXlmBf3
+R1
+I@ZmmaVEhYZf3:33:9N]010
+R2
+S1
+R3
+w1770939201
+8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_filter_grid.sv
+FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_filter_grid.sv
+!i122 44
+L0 3 105
+R5
+r1
+!s85 0
+31
+!s108 1770939206.000000
+!s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_filter_grid.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_filter_grid.sv|
+!i113 1
+R9
+R7
+vVGA_Controller
+R12
+!i10b 1
+!s100 9?Jf_KF6HVQMFmA4KJ>QI3
+R1
+I3IXIdm`HfU_dkFL;M403G2
+R2
+R3
+R4
+8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/VGA_Controller.v
+FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/VGA_Controller.v
+!i122 29
+L0 43 180
+R5
+r1
+!s85 0
+31
+R13
 !s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/VGA_Controller.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/VGA_Controller.v|
 !i113 1

@@ -5,10 +5,10 @@ module greyscale (
     input			iDVAL,
     input			iCLK,
     input			iRST,
-    output  [11:0]  oDATA
+    output  [11:0]  oDATA,
     output  [10:0]  oX_Cont,
     output  [10:0]  oY_Cont,
-    output          valid,
+    output          valid
 );
 
 logic rden;
@@ -16,7 +16,7 @@ logic wren;
 logic [11:0] buffer_out;
 logic full;
 logic empty;
-logic valid_ff
+logic valid_ff;
 logic [10:0] curr_x, curr_y;
 logic [11:0] top_row_1, top_row_2, bot_row_1, bot_row_2;
 logic [13:0] data_out;
@@ -40,7 +40,7 @@ FIFO #(.DEPTH(1280), .DATA_WIDTH(12)) buffer(
     .empty(empty)   
 );
 
-always @(posedge iCLK, negedge IRST) begin
+always_ff @(posedge iCLK, negedge iRST) begin
     if(!iRST)begin
         top_row_1 <= 0;
         top_row_2 <= 0;
@@ -55,7 +55,7 @@ always @(posedge iCLK, negedge IRST) begin
     end
 end
 
-always @(posedge iCLK, negedge iRST)begin
+always_ff @(posedge iCLK, negedge iRST)begin
     if(!iRST)begin
         curr_x <= 0;
         curr_y <= 0;
@@ -66,13 +66,13 @@ always @(posedge iCLK, negedge iRST)begin
     end
 end
 
-always begin
-    if(!|curr_y && !|curr_x) 
+always_comb begin
+    if(~|curr_y && ~|curr_x) 
         data_out <= bot_row_1;
-    else if (!|curr_y) begin 
+    else if (~|curr_y) begin 
         data_out <= bot_row_1 + bot_row_2;
     end
-    else if (!|curr_x) begin
+    else if (~|curr_x) begin
         data_out <= bot_row_1 + top_row_1;
     end
     else begin
@@ -80,11 +80,11 @@ always begin
     end
 end
 
-always @(posedge iCLK, negedge iRST)begin
+always_ff @(posedge iCLK, negedge iRST)begin
     if(!iRST)begin
         valid_ff <= 0;
     end else begin
-        valif_ff <= iDVAL;
+        valid_ff <= iDVAL;
     end
 end
 
