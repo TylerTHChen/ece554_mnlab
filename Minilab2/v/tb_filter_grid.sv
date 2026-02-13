@@ -1,8 +1,8 @@
 `timescale 1ns/1ps
 
 module tb_filter_grid();
-    logic clk, rst_n, vertical;
-    logic[33:0] data_in;
+    logic clk, rst_n, vertical, valid;
+    logic[34:0] data_in;
     logic [10:0] x_dc;
     logic [10:0] y_dc;
     logic signed [2:0] v_constant;
@@ -11,7 +11,7 @@ module tb_filter_grid();
     logic signed [11:0] data_out;
     logic [10:0] x_val, y_val;
     logic [11:0] din;
-    assign data_in = {y_val, x_val, din};
+    assign data_in = {valid,y_val, x_val, din};
 
     filter_grid iDUT(   .clk(clk),
                         .rst_n(rst_n),
@@ -32,6 +32,7 @@ module tb_filter_grid();
         v_constant = 3'sd2;
         h_constant = -3'sd2;
         vertical = 1;
+        valid = 1;
         x_dc = 11'd0;
         y_dc = 11'd959;
         @(posedge clk);

@@ -35,24 +35,24 @@ Z7 tCvgOpt 0
 n@c@c@d_@capture
 vconvolution
 Z8 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-!s110 1770941460
+!s110 1770963954
 !i10b 1
-!s100 :kaV1zPlQBRj7IRmjCzhY3
+!s100 @L8z68j=@X6`nz=H[2a5?1
 R1
-I75_O?YY0[2_TQQUXJekfc1
+In[O>cY?K1^`2h_2RWY^<Z2
 R2
 S1
 R3
-w1770941454
+w1770963951
 8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/convolution.sv
 FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/convolution.sv
-!i122 49
-L0 1 214
+!i122 60
+L0 1 230
 R5
 r1
 !s85 0
 31
-!s108 1770941459.000000
+!s108 1770963954.000000
 !s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/convolution.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/convolution.sv|
 !i113 1
@@ -60,24 +60,24 @@ Z9 o-work work -sv
 R7
 vFIFO
 R8
-R0
+!s110 1770943162
 !i10b 1
-!s100 <l39aRLbkBlBmLR]nJn[O0
+!s100 `jLjSM=Ja?bMcmAZT4BZK3
 R1
-Ig=HRKDZ2Vd9hG8lR`S]LQ1
+IQEhWkRQBhfg@GE8FEg]e=1
 R2
 S1
 R3
-w1770767379
+w1770943156
 8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/fifo.sv
 FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/fifo.sv
-!i122 18
+!i122 53
 Z10 L0 1 55
 R5
 r1
 !s85 0
 31
-Z11 !s108 1770935941.000000
+!s108 1770943162.000000
 !s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/fifo.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/fifo.sv|
 !i113 1
@@ -86,24 +86,24 @@ R7
 n@f@i@f@o
 vfilter_grid
 R8
-!s110 1770939264
+!s110 1770962954
 !i10b 1
-!s100 I4D4dhJ380b^FB1m7mTno3
+!s100 cI[3cRmnSU1hbPQFzahES2
 R1
-I`6>^G?W??35nb>YSOfHP91
+I>KIP7<P18kC9:7]IMMoUK3
 R2
 S1
 R3
-w1770939258
+w1770962859
 8C:\Users\tyler_hyposvu\UW\ECE554\MiniLabs\Minilab2\v\filter_grid.sv
 FC:\Users\tyler_hyposvu\UW\ECE554\MiniLabs\Minilab2\v\filter_grid.sv
-!i122 45
+!i122 54
 L0 1 39
 R5
 r1
 !s85 0
 31
-!s108 1770939264.000000
+!s108 1770962954.000000
 !s107 C:\Users\tyler_hyposvu\UW\ECE554\MiniLabs\Minilab2\v\filter_grid.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:\Users\tyler_hyposvu\UW\ECE554\MiniLabs\Minilab2\v\filter_grid.sv|
 !i113 1
@@ -151,7 +151,7 @@ R5
 r1
 !s85 0
 31
-R11
+Z11 !s108 1770935941.000000
 !s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/I2C_CCD_Config.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/I2C_CCD_Config.v|
 !i113 1
@@ -350,9 +350,34 @@ R13
 R6
 R7
 n@s@e@g7_@l@u@t_6
+vshift_register
+R8
+!s110 1770963002
+!i10b 1
+!s100 2Cl;mLO_ba<EmmK2P674`1
+R1
+ImZ8Z3<O:k?ioA3cRknK7J3
+R2
+S1
+R3
+w1770962725
+8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/shift_reg.sv
+FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/shift_reg.sv
+!i122 55
+L0 1 25
+R5
+r1
+!s85 0
+31
+!s108 1770963002.000000
+!s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/shift_reg.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/shift_reg.sv|
+!i113 1
+R9
+R7
 vtb_convolution
 R8
-!s110 1770940671
+!s110 1770943034
 !i10b 1
 !s100 QPFBDF1Q=cNgCCZjOnZNh0
 R1
@@ -363,13 +388,13 @@ R3
 w1770940665
 8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_convolution.sv
 FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_convolution.sv
-!i122 47
+!i122 52
 R10
 R5
 r1
 !s85 0
 31
-!s108 1770940671.000000
+!s108 1770943034.000000
 !s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_convolution.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_convolution.sv|
 !i113 1
@@ -377,24 +402,24 @@ R9
 R7
 vtb_filter_grid
 R8
-!s110 1770939206
+!s110 1770963477
 !i10b 1
-!s100 6a=KU4A`3jAGcmUkXlmBf3
+!s100 _7KHZlZ=_bBM?90CR:C;N2
 R1
-I@ZmmaVEhYZf3:33:9N]010
+IiC9NJFH1JZNKD7XQj>NDi2
 R2
 S1
 R3
-w1770939201
+w1770963473
 8C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_filter_grid.sv
 FC:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_filter_grid.sv
-!i122 44
-L0 3 105
+!i122 59
+L0 3 106
 R5
 r1
 !s85 0
 31
-!s108 1770939206.000000
+!s108 1770963476.000000
 !s107 C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_filter_grid.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/tyler_hyposvu/UW/ECE554/MiniLabs/Minilab2/v/tb_filter_grid.sv|
 !i113 1

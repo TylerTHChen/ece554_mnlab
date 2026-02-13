@@ -1,13 +1,13 @@
 module filter_grid(
     input logic clk,
     input logic rst_n,
-    input logic [33:0]data_in,
+    input logic [34:0]data_in,
     input logic vertical,
     input logic [10:0] x_dc,
     input logic [10:0] y_dc,
     input logic signed [2:0] v_constant,
     input logic signed [2:0] h_constant,
-    output logic [13:0]data_in_d,
+    output logic [34:0]data_in_d,
     output logic signed [11:0] data_out
 );
 logic [10:0]x, y;

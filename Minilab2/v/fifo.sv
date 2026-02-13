@@ -25,7 +25,7 @@ module FIFO
 	always_ff @(posedge clk, negedge rst_n) begin
 		if(!rst_n) begin
 			wptr <= '0;
-		end else if(wren && !full) begin
+		end else if(wren && (!full || rden)) begin
 			wptr <= wptr + 1;
 			MEM[wptr] <= i_data;
 		end
@@ -44,7 +44,7 @@ module FIFO
 	always_ff @(posedge clk, negedge rst_n) begin
 		if(!rst_n) begin
 			count <= 0;
-		end else if((rden&&!empty) && (wren && !full)) begin
+		end else if((rden&&wren)) begin
 			count <= count;
 		end else if(rden&&!empty) begin
 			count <= count - 1;
