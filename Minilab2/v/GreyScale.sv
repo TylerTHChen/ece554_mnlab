@@ -29,18 +29,25 @@ assign valid = valid_ff;
 assign rden = full;
 assign wren = iDVAL;
 
-FIFO #(.DEPTH(1280), .DATA_WIDTH(12)) buffer(
+// FIFO #(.DEPTH(1280), .DATA_WIDTH(12)) buffer(
+//     .clk(iCLK),
+//     .rst_n(iRST),
+//     .rden(rden),
+//     .wren(wren),
+//     .i_data(iDATA),
+//     .o_data(buffer_out),
+//     .full(full),
+//     .empty(empty)   
+// );
+
+shift_register #(.WIDTH(12), .DEPTH(1280)) buffer (
     .clk(iCLK),
     .rst_n(iRST),
-    .rden(rden),
-    .wren(wren),
-    .i_data(iDATA),
-    .o_data(buffer_out),
-    .full(full),
-    .empty(empty)   
+    .data_in(iDATA),
+    .data_out(buffer_out)
 );
 
-always_ff @(posedge iCLK, negedge iRST) begin
+always @(posedge iCLK, negedge iRST) begin
     if(!iRST)begin
         top_row_1 <= 0;
         top_row_2 <= 0;
@@ -49,13 +56,13 @@ always_ff @(posedge iCLK, negedge iRST) begin
     end
     else begin
         top_row_1 <= buffer_out;
-        top_row_2 <= top_row_2;
+        top_row_2 <= top_row_1;
         bot_row_1 <= iDATA;
         bot_row_2 <= bot_row_1;
     end
 end
 
-always_ff @(posedge iCLK, negedge iRST)begin
+always @(posedge iCLK, negedge iRST)begin
     if(!iRST)begin
         curr_x <= 0;
         curr_y <= 0;
@@ -80,7 +87,7 @@ always_comb begin
     end
 end
 
-always_ff @(posedge iCLK, negedge iRST)begin
+always @(posedge iCLK, negedge iRST)begin
     if(!iRST)begin
         valid_ff <= 0;
     end else begin
