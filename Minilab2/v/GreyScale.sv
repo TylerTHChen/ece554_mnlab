@@ -41,9 +41,10 @@ assign wren = iDVAL;
 // );
 
 shift_register #(.WIDTH(12), .DEPTH(1280)) buffer (
-    .clk(iCLK),
-    .rst_n(iRST),
+    .clk(clk),
+    .rst_n(rst_n),
     .data_in(iDATA),
+    .read(rden),
     .data_out(buffer_out)
 );
 

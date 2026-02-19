@@ -1,25 +1,38 @@
 module shift_register #(
-    parameter int WIDTH = 35,
-    parameter int DEPTH = 1280
-) (
+    parameter int WIDTH = 1,
+    parameter int DEPTH = 1
+)(
     input  logic               clk,
     input  logic               rst_n,
-    input  logic [WIDTH - 1:0] data_in,
-    output logic [WIDTH - 1:0] data_out
+    input  logic [WIDTH-1:0]   data_in,
+    input  logic               read,
+    output logic [WIDTH-1:0]   data_out
 );
-    logic [WIDTH-1:0] MEM [0:DEPTH-1];
 
-    integer i;
+    // Storage array for shift stages
+    logic [WIDTH-1:0] shift_mem [0:DEPTH-1];
 
+    // First stage
     always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            for (i = 0; i < DEPTH; i++) MEM[i] <= '0;
-        end else begin
-            MEM[0] <= data_in;
-            for (i = 1; i < DEPTH; i++) MEM[i] <= MEM[i-1];
-        end
+        if (!rst_n)
+            shift_mem[0] <= '0;
+        else if (read)
+            shift_mem[0] <= data_in;
     end
 
-    assign data_out = MEM[DEPTH-1];
+    // Remaining stages
+    genvar i;
+    generate
+        for (i = 1; i < DEPTH; i++) begin : shift_stages
+            always_ff @(posedge clk or negedge rst_n) begin
+                if (!rst_n)
+                    shift_mem[i] <= '0;
+                else if (read)
+                    shift_mem[i] <= shift_mem[i-1];
+            end
+        end
+    endgenerate
+
+    assign data_out = shift_mem[DEPTH-1];
 
 endmodule

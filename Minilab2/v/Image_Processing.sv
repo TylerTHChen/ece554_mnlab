@@ -14,7 +14,7 @@ logic [11:0] grey_out;
 logic grey_valid;
 logic [10:0] x_cont, y_cont;
 logic conv_valid;
-logic signed [14:0] conv_out;
+logic signed [11:0] conv_out;
 // grey scale instantiation
 greyscale u_greyscale (
     .iX_Cont(iX_Cont), 
@@ -34,12 +34,10 @@ convolution u_convolution (
     .clk    (iCLK),
     .rst_n  (iRST),
     .data_in (grey_out),
-    .read   (grey_valid),
-    .x      (x_cont),
-    .y      (y_cont),
-    .vertical (switch),
-    .data_out (output_data),
-    .valid   (valid)
+    .read   (iDVAL),
+    .switch (switch),
+    .data_out (output_data), 
+    .valid_out (valid)
     );
 
 // Abs instantiation

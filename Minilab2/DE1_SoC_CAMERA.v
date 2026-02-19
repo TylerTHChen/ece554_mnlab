@@ -311,18 +311,18 @@ CCD_Capture			u3	(
 						   );
 //D5M raw date convert to RGB data
 
-// RAW2RGB				u4	(	
-// 							.iCLK(D5M_PIXLCLK),
-// 							.iRST(DLY_RST_1),
-// 							.iDATA(mCCD_DATA),
-// 							.iDVAL(mCCD_DVAL),
-// 							.oRed(sCCD_R),
-// 							.oGreen(sCCD_G),
-// 							.oBlue(sCCD_B),
-// 							.oDVAL(sCCD_DVAL),
-// 							.iX_Cont(X_Cont),
-// 							.iY_Cont(Y_Cont)
-// 						   );
+RAW2RGB				u4	(	
+							.iCLK(D5M_PIXLCLK),
+							.iRST(DLY_RST_1),
+							.iDATA(mCCD_DATA),
+							.iDVAL(mCCD_DVAL),
+							// .oRed(sCCD_R),
+							// .oGreen(sCCD_G),
+							// .oBlue(sCCD_B),
+							.oDVAL(sCCD_DVAL),
+							.iX_Cont(X_Cont),
+							.iY_Cont(Y_Cont)
+						   );
 
 wire [11:0] output_data;
 wire valid_img;
@@ -336,7 +336,7 @@ image_processing u9 (
                      .iDATA(mCCD_DATA),
                      .switch(SW[1]),
                      .output_data(output_data), 
-					 .valid(valid_img)
+					      //.valid(valid_img)
                   );
 
 assign sCCD_R = output_data;
