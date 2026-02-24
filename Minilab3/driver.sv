@@ -54,7 +54,6 @@ module driver(
     // Correct for a 50MHz system clock: 50_000_000 / 16 = 3_125_000
     assign constant = 22'd3125000;
 
-    // Compute divisor from br_cfg (now matches the "correct" table)
     always_comb begin
         unique case (br_cfg)
             2'b00: db = constant / 16'd4800;   // -> 651 (0x028B)
