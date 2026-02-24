@@ -72,7 +72,7 @@ Problems encountered:
   camera and monitor. Our design was almost mirroring the same image twice. We realized 
   the issue was we hooked up the valid signal to the output valid from our image processing
   unit but this was not correct and was capturing more than our camera could at once. We
-  had to change the convolution valid signal to be 
+  had to change the convolution valid signal as well to use the same one that greyscale used. 
 
 Quartus resource utilization:
 
