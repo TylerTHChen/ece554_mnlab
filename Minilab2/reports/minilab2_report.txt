@@ -1,0 +1,99 @@
+Bret Sell, Tyler Chen, Will Strong
+
+Implementation information: 
+
+Image_Processing.sv:
+This is the top-level module that connects the grayscale and convolution
+stages into one image-processing pipeline. It instantiates the GreyScale
+and convolution modules and passes pixel data and valid signals between
+them. It keeps the timing aligned so that o_valid matches the processed
+pixel output. Keeping this modular helped us debug grayscale and
+convolution separately before combining everything.
+
+GreyScale.sv:
+This module converts incoming RGB pixel data into a 12-bit grayscale
+value using a weighted sum. The RGB channels are multiplied by constant
+values and added using fixed-point arithmetic. The design is fully
+synchronous and passes along a valid signal with the pixel data.
+Using weighted grayscale instead of simple averaging gave better
+results for edge detection.
+
+convolution.sv:
+This module implements a 3x3 Sobel edge-detection filter. Two shift
+registers delay the grayscale input by one full row and two full rows
+(parameterized by ROW_LENGTH). These delays create the first column of
+the 3x3 sliding window. The other two columns are formed by shifting
+the window horizontally each clock cycle.
+A hardcoded 3x3 Sobel kernel (horizontal edge) is stored in a signed
+array. The convolution is calculated as the sum of signed products over
+the 3x3 window. The result is widened to prevent overflow, and the
+absolute value is taken to get the gradient magnitude. The final value
+is assigned to o_data, and o_valid is asserted after the pipeline delay.
+
+shift_reg.sv:
+This module is a parameterized synchronous shift register used to delay
+pixels by a full row (ROW_LENGTH cycles).
+Originally, we used FIFOs for line buffering, but they caused timing
+misalignment between rows and produced white noise in the output.
+We replaced the FIFOs with this shift register module, which is simpler
+and gives a fixed delay. This fixed the white noise issue and corrected
+the edge output.
+
+img_proc_tb.sv:
+This was the top-level testbench used to generate an image and visually
+verify that grayscale and convolution were working correctly. We first
+tested only the grayscale stage to confirm the image converted properly.
+Then we enabled convolution to check edge detection.
+We used a simple Python script to convert images to a hex file and back
+to an image. A simple grid image was used so we could clearly verify
+both horizontal and vertical cases using the switch. The testbench
+evolved over time to test each module separately before testing the
+full pipeline.
+
+Problems encountered:
+
+1) Our first main issue we encountered was that our hex file was having 
+  XXXs written to the hex file when just testing greyscale. We released that
+  when using our FIFO files as shift registers it was not correctly always 
+  having a valid number shifted. We decided to scrap the FIFO usuage and create
+  just a simple shift register verilog file that would correctly shift. This 
+  fixed our issue with greyscale so we used these in convolution as well. 
+
+2) Our second main issue came within convolution. We initially had an additional
+  file called filter grid that we were using to assign the sobel value multiplication
+  using the switch. However something was wrong with this implementation in which 
+  we were having excessive white noise and the edge detection not working with the switch
+  and we had a hard time debugging both filter grid and convolution so we pivoted
+  and just simply hardcode the values into convolution and performed multiplication 
+  based off of the switch within convolution itself. That made us change some other 
+  logic after this as well. This fixed our issue and it works entirely. 
+
+3) Our final issue we had was when we implemented our design onto the fpga and used the 
+  camera and monitor. Our design was almost mirroring the same image twice. We realized 
+  the issue was we hooked up the valid signal to the output valid from our image processing
+  unit but this was not correct and was capturing more than our camera could at once. We
+  had to change the convolution valid signal as well to use the same one that greyscale used. 
+
+Quartus resource utilization:
+
+* ALMs: 719   
+* BRAM: 56,810 bits  
+* DSP blocks: 8  
+
+The 719 ALMs are primarily used for control logic, shift registers,
+and arithmetic in the grayscale and convolution stages. The 56,810
+BRAM bits come mainly from system-level camera and SDRAM buffering.
+The 8 DSP blocks are inferred for the signed multiplications in the
+3x3 Sobel convolution filter.
+
+Conclusion:
+
+Overall, we successfully designed and implemented a working image-processing pipeline 
+that performs grayscale conversion followed by Sobel edge detection using a 3x3 sliding window.
+Throughout the project, we encountered multiple issues including incorrect pixel shifting, 
+convolution noise, and valid signal timing problems on hardware. By replacing FIFOs with a 
+simpler shift register design, hardcoding the Sobel filter inside the convolution module,
+and properly aligning valid signals on the FPGA, we were able to resolve each issue.
+After debugging and refining the design, the system worked correctly in simulation and on the
+DE1-SoC board using the camera and monitor. We were able to demonstrate clean edge detection 
+with both filter modes and complete the final demo successfully.
