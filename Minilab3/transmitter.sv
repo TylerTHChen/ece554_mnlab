@@ -1,118 +1,102 @@
 module transmitter (
-    input  logic       clk,
-    input  logic       rst_n,        // active-low reset
-    input  logic       baud_tick,    // 1-cycle pulse @ baud rate (1x per bit)
-    input  logic [7:0] data_in,
-    input  logic       data_valid,   // request to send (pulse or level)
-    output logic       tx_out,        // UART TX line
-    output logic       busy           // high while transmitting
+    input logic clk, 
+    input logic rst_n,
+    input logic en_16x,
+    input logic wr_tx,
+    input logic [7:0] wr_data,
+    output logic txd,
+    output logic tbr
 );
 
-    typedef enum logic [2:0] {
-        IDLE,
-        WAIT_TICK,   // align start bit to baud_tick
-        START_BIT,
-        DATA_BITS,
-        STOP_BIT
-    } state_t;
-
+    typedef enum logic [1:0] {IDLE, WAIT, SEND} state_t;
     state_t state, next_state;
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) state <= IDLE;
+        else state <= next_state;
+    end
 
-    logic [7:0] shreg;
-    logic [2:0] bit_count;
+    //baud tick stuff, divide by 16 to get 1 baud tick
+    logic [3:0] tick16_cnt;
+    logic baud_tick;
 
-    // Prevent re-sending if data_valid is held high:
-    // We "consume" one request per data_valid assertion.
-    logic dv_seen;
-
-    // ----------------------------
-    // Sequential: state + registers
-    // ----------------------------
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            state     <= IDLE;
-            shreg     <= 8'd0;
-            bit_count <= 3'd0;
-            dv_seen   <= 1'b0;
+            tick16_cnt <= 4'd0;
+            baud_tick <= 1'b0;
         end else begin
-            state <= next_state;
-
-            // Track whether we've already accepted this data_valid assertion.
-            // Reason: if data_valid stays high (level), don't retransmit endlessly.
-            if (!data_valid)
-                dv_seen <= 1'b0;
-            else if (state == IDLE && next_state == WAIT_TICK)
-                dv_seen <= 1'b1;
-
-            // Latch the byte exactly once when we accept a request
-            if (state == IDLE && next_state == WAIT_TICK) begin
-                shreg     <= data_in;
-                bit_count <= 3'd0;
-            end
-
-            // Shift one bit per baud tick during DATA_BITS
-            // Reason: UART sends LSB first, one bit per bit-time.
-            if (state == DATA_BITS && baud_tick) begin
-                shreg     <= {1'b0, shreg[7:1]};
-                bit_count <= bit_count + 3'd1;
+            baud_tick <= 1'b0; // default low each cycle
+            if (en_16x) begin
+                if (tick16_cnt == 4'd15) begin
+                    baud_tick <= 1'b1; // pulse on every 16th cycle
+                    tick16_cnt <= 4'd0; // reset counter
+                end else begin
+                    tick16_cnt <= tick16_cnt + 4'd1;
+                end
             end
         end
     end
 
-    // ----------------------------
-    // Combinational: outputs + next state
-    // ----------------------------
-    always_comb begin
-        // Defaults
+    // Transmitter buffer control
+    logic [7:0] tx_buf;
+    logic buf_full;
+
+    assign tbr = !buf_full;
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            tx_buf <= 8'h00;
+            buf_full <= 1'b0;
+        end else begin
+            if (wr_tx && tbr) begin
+                tx_buf <= wr_data;
+                buf_full <= 1'b1;
+            end
+
+            if (state == WAIT && next_state == SEND) begin 
+                buf_full <= 1'b0;
+            end
+        end
+    end
+
+    // shift reg and fsm
+    logic [9:0] shreg; // start bit + 8 data bits + stop bit
+    logic [3:0] bit_cnt;
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            shreg <= 10'b1111111111; // idle state of line is high
+            bit_cnt <= 4'd0;
+        end else begin
+            if (state == WAIT && next_state == SEND) begin
+                shreg <= {1'b1, tx_buf, 1'b0}; // stop bit, data bits, start bit
+                bit_cnt <= 4'd0;
+            end else if (state == SEND && baud_tick) begin
+                shreg <= {1'b1, shreg[9:1]}; // shift right, fill with 1s for stop bits
+                bit_cnt <= bit_cnt + 4'd1;
+            end
+        end
+    end
+
+    always_comb begin 
         next_state = state;
-        tx_out     = 1'b1;              // idle high
-        busy       = (state != IDLE);
-
-        unique case (state)
+        txd = 1'b1; // default idle state
+        case (state)
             IDLE: begin
-                busy   = 1'b0;
-                tx_out = 1'b1;
-
-                // Accept a new send request only if we haven't consumed
-                // the current data_valid assertion yet.
-                if (data_valid && !dv_seen)
-                    next_state = WAIT_TICK;
+                txd = 1'b1; // line is high when idle
+                if (buf_full) next_state = WAIT;
             end
 
-            WAIT_TICK: begin
-                // Hold line high while waiting to align start bit.
-                tx_out = 1'b1;
-                if (baud_tick)
-                    next_state = START_BIT;
+            WAIT: begin
+                txd = 1'b1; // line is high while waiting to start
+                if (baud_tick) next_state = SEND; // start immediately on next cycle
             end
 
-            START_BIT: begin
-                // Drive start bit low for exactly one bit time.
-                tx_out = 1'b0;
-                if (baud_tick)
-                    next_state = DATA_BITS;
-            end
+            SEND: begin
+                txd = shreg[0]; // output the LSB of the shift register
 
-            DATA_BITS: begin
-                // Drive current LSB
-                tx_out = shreg[0];
-
-                // After sending 8 bits (counts 0..7), go to stop bit.
-                if (baud_tick && (bit_count == 3'd7))
-                    next_state = STOP_BIT;
-            end
-
-            STOP_BIT: begin
-                // Stop bit high for one bit time.
-                tx_out = 1'b1;
-                if (baud_tick)
-                    next_state = IDLE;
-            end
-
-            default: begin
-                next_state = IDLE;
-                tx_out     = 1'b1;
-                busy       = 1'b0;
+                if (baud_tick && bit_cnt == 4'd9) begin
+                    next_state = IDLE; // done sending when we have shifted out all bits
+                end
             end
         endcase
     end

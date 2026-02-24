@@ -30,46 +30,74 @@ module spart(
     input logic rxd
 );
 
-logic en;
-logic [7:0] recieve_buffer, divisor_buffer;
+logic rst_n;
+    assign rst_n = ~rst;
 
-bus_interface bus_int(
-    .iocs(iocs),
-    .iorw(iorw),
-    .rda(rda),
-    .tbr(tbr),
-    .ioaddr(ioaddr),
-    .recieve_buffer(recieve_buffer),
-    .databus(databus),
-    .divisor_buffer(divisor_buffer)
-);
+    // Internal interconnect wires
+    logic        en_16x;
 
-baud_rate_generator BRG(
-    .clk(clk),
-    .rst_n(rst),
-    .ioaddr(ioaddr),
-    .DB(divisor_buffer), // todo: tyler -> will: I think we should just ahve a db instead of high and low coming from the interface since there is not clk in interface
-    .en(en)
-);
+    logic        wr_tx;
+    logic [7:0]  wr_data;
+    logic        wr_dbl;
+    logic        wr_dbh;
+    logic        rd_rx;
 
-transmitter t1(
-    .clk(clk),
-    .rst_n(rst),        
-    .baud_tick(en),
-    .data_in(databus),
-    .data_valid(), //todo: tyler -> bret: dont think we need this since we have busy
-    .tx_out(txd),
-    .busy(tbr)
-);
+    logic [7:0]  rx_data_int;
+    logic        rda_int;
+    logic        tbr_int;
 
-receiver r1(
-    .clk(clk),
-    .rst_n(rst),
-    .baud_rate(en), 
-    .rx(rxd), 
-    .clr_valid(), // todo: tyler -> bret: same as above
-    .data_out(recieve_buffer),
-    .valid() // todo: tyler -> bret: same as above
-);
+    assign rda = rda_int;
+    assign tbr = tbr_int;
+
+    // Bus Interface 
+    bus_interface u_bus_if (
+        .databus (databus),
+        .ioaddr  (ioaddr),
+        .iocs    (iocs),
+        .iorw    (iorw),
+
+        .rda     (rda_int),
+        .tbr     (tbr_int),
+
+        .rx_data (rx_data_int),
+
+        .wr_tx   (wr_tx),
+        .wr_data (wr_data),
+        .wr_dbl  (wr_dbl),
+        .wr_dbh  (wr_dbh),
+        .rd_rx   (rd_rx)
+    );
+
+    // Baud Rate Generator
+    BRG u_brg (
+        .clk     (clk),
+        .rst_n   (rst_n),
+        .wr_dbl  (wr_dbl),
+        .wr_dbh  (wr_dbh),
+        .data_in (wr_data),
+        .en_16x  (en_16x)
+    );
+
+    // Transmitter
+    transmitter u_tx (
+        .clk     (clk),
+        .rst_n   (rst_n),
+        .en_16x  (en_16x),
+        .wr_tx   (wr_tx),
+        .wr_data (wr_data),
+        .txd     (txd),
+        .tbr     (tbr_int)
+    );
+
+    // Receiver
+    receiver u_rx (
+        .clk     (clk),
+        .rst_n   (rst_n),
+        .en_16x  (en_16x),
+        .rxd     (rxd),
+        .rd_rx   (rd_rx),
+        .rx_data (rx_data_int),
+        .rda     (rda_int)
+    );
 
 endmodule
