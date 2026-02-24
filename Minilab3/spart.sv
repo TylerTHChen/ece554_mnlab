@@ -25,7 +25,7 @@ module spart(
     output logic rda,
     output logic tbr,
     input logic [1:0] ioaddr,
-    inout logic [7:0] databus,
+    inout wire [7:0] databus,
     output logic txd,
     input logic rxd
 );

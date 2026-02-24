@@ -1,158 +1,147 @@
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    
-// Design Name: 
-// Module Name:    driver 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
-//
-// Dependencies: 
-//
-// Revision: 
-// Revision 0.01 - File Created
-// Additional Comments: 
-//
-//////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////
+// // Company: 
+// // Engineer: 
+// // 
+// // Create Date:    
+// // Design Name: 
+// // Module Name:    driver 
+// // Project Name: 
+// // Target Devices: 
+// // Tool versions: 
+// // Description: 
+// //
+// // Dependencies: 
+// //
+// // Revision: 
+// // Revision 0.01 - File Created
+// // Additional Comments: 
+// //
+// //////////////////////////////////////////////////////////////////////////////////
 module driver(
-    input clk,
-    input rst,
-    input [1:0] br_cfg,
-    output iocs,
-    output iorw,
-    input rda,
-    input tbr,
-    output [1:0] ioaddr,
-    inout [7:0] databus
-    );
+    input  logic       clk,
+    input  logic       rst,       // active-high reset
+    input  logic [1:0] br_cfg,
+    output logic       iocs,
+    output logic       iorw,
+    input  logic       rda,
+    input  logic       tbr,
+    output logic [1:0] ioaddr,
+    inout  wire [7:0] databus
+);
 
-    typedef enum logic[2:0] {
-        RECIEVE, 
-        TRANSMIT, 
-        STATUS_REC, 
-        STAUS_TRANS,
-        DBLOW, 
+    typedef enum logic [2:0] {
+        RECIEVE,
+        TRANSMIT,
+        STATUS_REC,
+        STATUS_TRANS,
+        DBLOW,
         DBHIGH
     } state_e;
 
     state_e state, next_state;
 
-    logic dblow_s, dbhigh_s, status_rec_s, status_trans_s, rec_s, trans_s;
+    // Need enough bits for 3,125,000 (50MHz/16)
+    logic [21:0] constant;   // was [20:0]
+    logic [15:0] db;         // divisor fits in 16 bits for these bauds
 
-    logic [20:0] constant;
-    logic [16:0] db;
     logic [7:0] databus_o, databus_i;
-    logic db_out_en;
-    logic [7:0] data; // from/to SPART
+    logic       db_out_en;
+    logic [7:0] data;
 
-    assign dblow_s = state = DBLOW; 
-    assign dbhigh_s = state = DBHIGH; 
-    assign status_rec_s = state = STATUS_REC; 
-    assign status_trans_s = state = STATUS_TRANS; 
-    assign rec_s = state = RECIEVE; 
-    assign trans_s = state = TRANSMIT;
-
-    assign databus = db_out_en ? databus_o : 'z;
+    assign databus   = db_out_en ? databus_o : 8'hZZ;
     assign databus_i = databus;
-    
-    
-    always_ff @(posedge clk)begin
-        if(dblow_s)
-            databus_o <= db[7:0];
-        else if(dbhigh_s)
-            databus_o <= db[15:8];
-        else if(trans_s)
-            databus_o <= data;
+
+    // Correct for a 50MHz system clock: 50_000_000 / 16 = 3_125_000
+    assign constant = 22'd3125000;
+
+    // Compute divisor from br_cfg (now matches the "correct" table)
+    always_comb begin
+        unique case (br_cfg)
+            2'b00: db = constant / 16'd4800;   // -> 651 (0x028B)
+            2'b01: db = constant / 16'd9600;   // -> 324 (0x0144)
+            2'b10: db = constant / 16'd19200;  // -> 162 (0x00A2)
+            2'b11: db = constant / 16'd38400;  // -> 81  (0x0051)
+            default: db = constant / 16'd9600;
+        endcase
     end
 
-    always_ff @(posedge clk) begin
-        if(rec_s) 
-            data <= databus_i;
+    // Drive bus value based on state (your style)
+    always_comb begin
+        databus_o = 8'h00;
+        if (state == DBLOW)
+            databus_o = db[7:0];
+        else if (state == DBHIGH)
+            databus_o = db[15:8];
+        else if (state == TRANSMIT)
+            databus_o = data;
     end
 
-
-    always_ff @(posedge clk, negedge rst_n) begin
-        if(rst_n) 
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst)
             state <= DBLOW;
         else
             state <= next_state;
     end
 
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst)
+            data <= 8'h00;
+        else if (state == RECIEVE)
+            data <= databus_i;
+    end
+
     always_comb begin
-        iocs = 0;
-        iorw = 0;
-        ioaddr = 2'b0;
-        db_out_en = 0;
+        iocs       = 1'b0;
+        iorw       = 1'b0;
+        ioaddr     = 2'b00;
+        db_out_en  = 1'b0;
         next_state = state;
-        case(state)
+
+        case (state)
             DBLOW: begin
-                iocs = 1;
-                ioaddr = 2'b10;
-                db_out_en = 1;
-                next_state = DBHIGH;
-            end 
-            DBHIGH: begin
-                iocs = 1;
-                ioaddr = 2'b11;
-                db_out_en = 1;
-                next_state = STATUS;
+                iocs      = 1'b1;
+                iorw      = 1'b0;
+                ioaddr    = 2'b10;      // DIV_LO
+                db_out_en = 1'b1;
+                next_state= DBHIGH;
             end
+
+            DBHIGH: begin
+                iocs      = 1'b1;
+                iorw      = 1'b0;
+                ioaddr    = 2'b11;      // DIV_HI
+                db_out_en = 1'b1;
+                next_state= STATUS_REC;
+            end
+
             STATUS_REC: begin
-                iocs = 1;
-                ioaddr = 2'b01;
-                if(databus_i[0])
+                if (rda)
                     next_state = RECIEVE;
-            end 
+            end
+
+            RECIEVE: begin
+                iocs      = 1'b1;
+                iorw      = 1'b1;       // read
+                ioaddr    = 2'b00;      // DATA
+                db_out_en = 1'b0;
+                next_state= STATUS_TRANS;
+            end
+
             STATUS_TRANS: begin
-                iocs = 1;
-                ioaddr = 2'b01;
-                if(databus_i[1])
+                if (tbr)
                     next_state = TRANSMIT;
             end
-            RECIEVE: begin
-                iocs = 1;
-                ioaddr = 2'b0;
-                iorw = 1;
-                next_state = STATUS_TRANS;
-            end 
+
             TRANSMIT: begin
-                iocs = 1;
-                ioaddr = 2'b0;
-                iorw = 0;
-                db_out_en = 1;
-                next_state = STATUS_REC;
-            end 
-            default begin
-                next_state = DBLOW;
+                iocs      = 1'b1;
+                iorw      = 1'b0;       // write
+                ioaddr    = 2'b00;      // DATA
+                db_out_en = 1'b1;
+                next_state= STATUS_REC;
             end
+
+            default: next_state = DBLOW;
         endcase
     end
-
-
-    // DB logic
-    assign constant = 21'b101111101011110000100;  // 25MHz / 16
-    always_comb begin
-        case(br_cfg)
-            2'b00 : begin // 4800
-                db = constant / 10'd4800;
-            end
-
-            2'b01 : begin // 9600
-                db = constant / 14'd9600;
-            end
-
-            2'b10 : begin // 19200
-                db = constant / 15'd19200;
-            end
-
-            2'b11 : begin // 38400
-                db = constant / 16'd38400;
-            end
-        endcase
-    end
-
 
 endmodule

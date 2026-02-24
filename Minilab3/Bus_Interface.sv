@@ -1,6 +1,6 @@
 module bus_interface (
     //bus signals
-    inout tri [7:0] databus,
+    inout wire [7:0] databus,
     input logic [1:0] ioaddr,
     input logic iocs,
     input logic iorw,
